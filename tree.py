@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Node:
     def __init__(self,val, left = None, right=None):
         self.val = val
@@ -42,7 +45,31 @@ def DFS(n: Node):
         if a.left: stack.append(a.left)
         
 
+def BFS(n):
+    b = deque()
+    b.append(n)
+    while b:
+        a = b.popleft()
+        print(a,end = " ")
+        if a.left: b.append(a.left)
+        if a.right: b.append(a.right)
+    
 
+def checkBST(n: Node, v):
+    if not n:
+        return False
+    
+    if n.val == v:
+        return True
+    
+    if n.val < v:
+        return checkBST(n.right,v)
+    return checkBST(n.left,v)
+    
+    
+    
+    
+    
 n = Node(10)
 a = Node(7)
 b = Node(8)
@@ -57,10 +84,4 @@ b.right = c
 e.left = d
 e.right = h
 
-preOrder(n)
-print()
-postOrder(n)
-print()
-inOrder(n)
-print()
-DFS(n)
+print(checkBST(n,11))
