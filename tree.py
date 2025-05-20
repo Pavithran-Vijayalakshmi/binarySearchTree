@@ -83,6 +83,7 @@ def hasPathSum(root: Node, v: int):
         
 
 def isBalanced(n: Node):
+    balanced = [True]
     def path(n: Node):
         if not n:
             return 0
@@ -91,8 +92,14 @@ def isBalanced(n: Node):
         right = path(n.right)
         
         if abs(left - right) > 1:
-            return False
+            balanced[0] = False
+            return 0
         
+        return 1+max(left, right)
+    
+    path(n)
+    return balanced[0]
+
         
     
 n = Node(10)
@@ -102,12 +109,16 @@ c = Node(9)
 d = Node(11)
 e = Node(12)
 h = Node(13)
+i = Node(14)
+j = Node(15)
 n.right = e
 n.left = b
 b.left = a
 b.right = c
 e.left = d
 e.right = h
+h.right = i
+# i.right = j
 
 print(hasPathSum(n,27))
-print(isBalanced)
+print(isBalanced(n))
