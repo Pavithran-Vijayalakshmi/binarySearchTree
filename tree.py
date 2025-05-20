@@ -66,9 +66,34 @@ def checkBST(n: Node, v):
         return checkBST(n.right,v)
     return checkBST(n.left,v)
     
+
+def hasPathSum(root: Node, v: int):
+    def pathSum(root: Node, cs):
+        if not root:
+            return False
     
+        cs += root.val
     
+        if not root.left and not root.right :
+            return cs == v
     
+        return pathSum(root.left,cs) or pathSum(root.right,cs)
+    
+    return pathSum(root,0)
+        
+
+def isBalanced(n: Node):
+    def path(n: Node):
+        if not n:
+            return 0
+        
+        left = path(n.left)
+        right = path(n.right)
+        
+        if abs(left - right) > 1:
+            return False
+        
+        
     
 n = Node(10)
 a = Node(7)
@@ -84,4 +109,5 @@ b.right = c
 e.left = d
 e.right = h
 
-print(checkBST(n,11))
+print(hasPathSum(n,27))
+print(isBalanced)
