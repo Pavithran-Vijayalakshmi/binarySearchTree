@@ -100,6 +100,16 @@ def isBalanced(n: Node):
     path(n)
     return balanced[0]
 
+def isSameTree(p,q) -> bool:
+        def same(p,q):
+            if not p and not q:
+                return True
+            if (q and not p) or (p and not q):
+                return False
+            if p.val!=q.val:
+                return False        
+            return same(p.left,q.left) and same(p.right,q.right)
+        return same(p,q)
         
     
 n = Node(10)
@@ -118,7 +128,9 @@ b.right = c
 e.left = d
 e.right = h
 h.right = i
+
+z = Node(10)
+z.left = n
 # i.right = j
 
-print(hasPathSum(n,27))
-print(isBalanced(n))
+print(isSameTree(n,n))
